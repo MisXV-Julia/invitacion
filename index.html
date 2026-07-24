@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mis Quince Julia</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config from Guidelines -->
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "background": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-background": "#757575",
+                      "surface": "#ffffff",
+                      "inverse-primary": "#aecfaf",
+                      "on-primary-fixed": "#05210c",
+                      "tertiary-container": "#9a6b48",
+                      "tertiary-fixed": "#ffdcc5",
+                      "outline": "#737971",
+                      "on-primary-fixed-variant": "#314d34",
+                      "surface-container-highest": "#e4e2e2",
+                      "on-secondary-fixed": "#092008",
+                      "surface-dim": "#dbd9d9",
+                      "on-tertiary-container": "#fffdff",
+                      "on-tertiary": "#ffffff",
+                      "surface-container": "#efeded",
+                      "on-primary-container": "#fefff9",
+                      "surface-container-high": "#eae8e7",
+                      "error-container": "#ffdad6",
+                      "inverse-on-surface": "#f2f0f0",
+                      "primary": "#47644a",
+                      "on-error": "#ffffff",
+                      "surface-variant": "#e4e2e2",
+                      "on-error-container": "#93000a",
+                      "tertiary": "#7e5332",
+                      "primary-fixed-dim": "#aecfaf",
+                      "secondary-fixed-dim": "#b1cfa8",
+                      "on-secondary-fixed-variant": "#344d30",
+                      "on-tertiary-fixed-variant": "#653d1e",
+                      "primary-container": "#5f7d61",
+                      "on-surface": "#757575",
+                      "on-primary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "inverse-surface": "#303030",
+                      "surface-container-low": "#f5f3f3",
+                      "secondary-container": "#cdebc3",
+                      "secondary": "#4b6546",
+                      "on-surface-variant": "#424841",
+                      "tertiary-fixed-dim": "#f4bb92",
+                      "surface-tint": "#48654b",
+                      "primary-fixed": "#caebca",
+                      "secondary-fixed": "#cdebc3",
+                      "on-secondary-container": "#516b4b",
+                      "surface-bright": "#fbf9f8",
+                      "outline-variant": "#c2c8bf",
+                      "on-tertiary-fixed": "#301400"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "container-max": "1140px",
+                      "stack-sm": "0.5rem",
+                      "stack-lg": "3rem",
+                      "section-padding": "6rem",
+                      "stack-md": "1.5rem",
+                      "gutter": "2rem"
+              },
+              "fontFamily": {
+                      "label-caps": ["Cinzel", "serif"],
+                      "body-md": ["Cinzel", "serif"],
+                      "headline-md": ["Cinzel", "serif"],
+                      "body-lg": ["Cinzel", "serif"],
+                      "headline-lg-mobile": ["Cinzel", "serif"],
+                      "display-xl": ["Cinzel", "serif"],
+                      "headline-lg": ["Cinzel", "serif"]
+              },
+              "fontSize": {
+                      "label-caps": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.15em", "fontWeight": "600" }],
+                      "body-md": ["1.15rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+                      "headline-md": ["2rem", { "lineHeight": "1.3", "fontWeight": "500" }],
+                      "body-lg": ["1.25rem", { "lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                      "headline-lg-mobile": ["2.25rem", { "lineHeight": "1.2", "fontWeight": "500" }],
+                      "display-xl": ["4.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+                      "headline-lg": ["3rem", { "lineHeight": "1.2", "fontWeight": "500" }]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body {
+            background-color: #ffffff;
+            color: #757575; /* soft lighter gray text — never darker, never green */
+            font-weight: 400;
+        }
+        .mix-multiply {
+            mix-blend-mode: multiply;
+        }
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+        .organic-accent {
+            position: absolute;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .content-layer {
+            position: relative;
+            z-index: 10;
+        }
+        .ambient-shadow {
+            box-shadow: 0 10px 40px rgba(95,125,97,0.04);
+        }
+        /* Glass card — mostly blur, barely any white tint, so the glitter rain still reads through it */
+        .card-glass {
+            background: rgba(255,255,255,0.14);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            border: 1px solid rgba(255,255,255,0.45);
+            border-radius: 28px;
+            box-shadow: 0 10px 40px rgba(95,125,97,0.1);
+        }
+        /* True glass — almost no color fill, just blur + a warm brown rim so it still reads tinted, not white */
+        .card-glass-brown {
+            background: rgba(196,168,138,0.05);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(196,168,138,0.45);
+            border-radius: 28px;
+            box-shadow: 0 12px 40px rgba(120,100,80,0.15);
+        }
+        .btn-minimal {
+            border: 1px solid #c2c8bf;
+            background: transparent;
+            transition: background-color 0.2s ease, transform 0.12s ease, box-shadow 0.2s ease;
+            color: #757575;
+            cursor: pointer;
+        }
+        .btn-minimal:hover {
+            background-color: rgba(117, 117, 117, 0.1);
+            box-shadow: 0 6px 16px -8px rgba(0,0,0,0.18);
+        }
+        .btn-minimal:active {
+            background-color: rgba(117, 117, 117, 0.18);
+            transform: scale(0.96);
+            box-shadow: none;
+        }
+
+        /* Fixed background photo — stays put while content scrolls. The white wash is baked into
+           this SAME layer (z:0) via a gradient, so it never covers the foreground PNGs/text, which
+           paint above it in normal DOM order (no competing z-index needed for them). */
+        .bg-fixed {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('fondo.png');
+            background-size: cover, cover;
+            background-position: center top, center top;
+            background-repeat: no-repeat, no-repeat;
+        }
+
+        /* Section icons (custom PNGs) — same larger size everywhere */
+        .icon-doodle {
+            width: 92px;
+            height: 92px;
+            object-fit: contain;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Falling glitter — silver/white, clearly visible; text itself never uses this color */
+        .glitter-layer {
+            position: fixed;
+            inset: 0;
+            z-index: 5;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .spark {
+            position: absolute;
+            top: -5vh;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ffffff 0%, #f0f2f4 55%, transparent 100%);
+            box-shadow: 0 0 9px 2px rgba(225,229,234,.75);
+            opacity: 0;
+            animation-name: fall, twinkle;
+            animation-timing-function: linear, ease-in-out;
+            animation-iteration-count: infinite, infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-8vh) translateX(0); }
+            100% { transform: translateY(112vh) translateX(var(--drift, 20px)); }
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: var(--peak, .9); }
+        }
+
+        /* Subtle animation on JULIA — letters stay the same gray, only a soft silver glow pulses behind them */
+        .name-glow {
+            animation: glow-pulse 3.2s ease-in-out infinite;
+        }
+        @keyframes glow-pulse {
+            0%, 100% { text-shadow: 0 0 0px rgba(200,205,215,0); }
+            50% { text-shadow: 0 0 20px rgba(200,205,215,.55), 0 0 38px rgba(200,205,215,.25); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .name-glow { animation: none; }
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden w-full max-w-md mx-auto min-h-screen relative font-body-md text-on-surface">
+
+<!-- Fixed background: fondo.png, muted with a white wash, no blur -->
+<div class="bg-fixed"></div>
+
+<!-- Falling glitter -->
+<div class="glitter-layer" id="glitter"></div>
+
+<!-- 1. Hero — full screen photo, name + countdown on top -->
+<section class="relative w-full min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+<div class="absolute inset-0" style="mask-image:linear-gradient(to bottom, black 55%, transparent 97%); -webkit-mask-image:linear-gradient(to bottom, black 55%, transparent 97%);">
+<div class="absolute inset-0 bg-cover bg-center" style="background-image:url('hero.jpg.jpeg');"></div>
+<div class="absolute inset-0" style="background:rgba(255,255,255,0.84);"></div>
+</div>
+<div class="content-layer flex flex-col items-center">
+<div class="flex items-center gap-3 mb-8">
+<span style="width:44px;height:1px;background:#9c9c9c;display:inline-block;"></span>
+<span style="width:7px;height:7px;background:#9c9c9c;display:inline-block;transform:rotate(45deg);"></span>
+<span style="width:44px;height:1px;background:#9c9c9c;display:inline-block;"></span>
+</div>
+<span class="font-label-caps text-on-surface tracking-widest mb-5 uppercase" style="font-size:1.5rem; font-weight:600; font-style:italic;">MIS QUINCE</span>
+<h1 class="font-display-xl text-on-surface tracking-tight name-glow" style="font-size:6rem; line-height:1; font-weight:600; font-style:italic;">JULIA</h1>
+<h2 class="font-label-caps text-on-surface tracking-widest mt-16 mb-8 uppercase text-center" style="font-size:1.15rem; font-weight:600;">Cuenta Regresiva</h2>
+<div class="card-glass p-10 flex flex-col items-center relative overflow-hidden">
+<div class="flex gap-3 text-center" id="countdown">
+<div class="flex flex-col">
+<span class="font-headline-lg-mobile text-on-surface" style="font-size:2.25rem; font-weight:600;" id="days">81</span>
+<span class="font-label-caps text-label-caps text-outline mt-1">DÍAS</span>
+</div>
+<span class="font-headline-lg-mobile text-outline" style="font-size:2.25rem; font-weight:300;">:</span>
+<div class="flex flex-col">
+<span class="font-headline-lg-mobile text-on-surface" style="font-size:2.25rem; font-weight:600;" id="hours">06</span>
+<span class="font-label-caps text-label-caps text-outline mt-1">HS</span>
+</div>
+<span class="font-headline-lg-mobile text-outline" style="font-size:2.25rem; font-weight:300;">:</span>
+<div class="flex flex-col">
+<span class="font-headline-lg-mobile text-on-surface" style="font-size:2.25rem; font-weight:600;" id="minutes">06</span>
+<span class="font-label-caps text-label-caps text-outline mt-1">MIN</span>
+</div>
+<span class="font-headline-lg-mobile text-outline" style="font-size:2.25rem; font-weight:300;">:</span>
+<div class="flex flex-col">
+<span class="font-headline-lg-mobile text-on-surface" style="font-size:2.25rem; font-weight:600;" id="seconds">00</span>
+<span class="font-label-caps text-label-caps text-outline mt-1">SEG</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 mt-10">
+<span style="width:44px;height:1px;background:#9c9c9c;display:inline-block;"></span>
+<span style="width:7px;height:7px;background:#9c9c9c;display:inline-block;transform:rotate(45deg);"></span>
+<span style="width:44px;height:1px;background:#9c9c9c;display:inline-block;"></span>
+</div>
+</div>
+</section>
+<!-- Section Divider -->
+<div class="w-full flex justify-center py-6">
+<img alt="horizontal botanical divider" class="w-64 mix-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUUpyhe2STAR3ImVp0Zv5MlUTkDT3ewPRnM5vX6m2AzjR8k7fNb700X6L2SapMHMNak6aR2TNtrpkcr06ONAISCfkpF25DOpaNFCDF3AiKvygyadOliZs28A7EGLnqb51EmL9OikBAyH2Dss2r1fg8HmLveeF6E055i4Wl-q4oxHsRY8qTvEWuAKaqWb84P1Rvok7_HTYJ6j2o-H5QbV4qFpUN-PGtkekLI-jEr3zXEwQcHhSQLTWhZcDrq6yBw-E5XcTbrcdZ8_NW"/>
+</div>
+
+<!-- 3. Cuándo -->
+<section class="w-full px-6 py-8 content-layer relative">
+<div class="flex flex-col items-center text-center">
+<img alt="" class="icon-doodle mb-3" src="simbolo-CUANDO.png"/>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2 uppercase">¿Cuándo?</h2>
+<p class="font-body-md text-on-surface mb-6" style="font-size:1.15rem; font-weight:500;">11 de octubre · 21:30 hs.</p>
+<a class="btn-minimal px-6 py-3 rounded-full font-label-caps text-label-caps flex items-center gap-2" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Mis+XV+Julia&dates=20261011T213000/20261012T033000&details=Te+espero+para+festejar+mis+15&location=Loop+Sal%C3%B3n+de+Eventos%2C+Santa+Fe+28%2C+Rufino%2C+Santa+Fe&ctz=America%2FArgentina%2FBuenos_Aires" target="_blank" rel="noopener">
+                AGENDAR
+            </a>
+</div>
+</section>
+<!-- Section Divider -->
+<div class="w-full flex justify-center py-6">
+<img alt="horizontal botanical divider" class="w-48 mix-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrBkaZRgRozK-QWF1ERNzeQOjFCKID5aX1oztIlE2KXs0zZKFhriTxafNXwGTJIE9dpgkBuhx_jw6m6CAy73Te0lLgS_YGjB2AmsvS_bS7Z5MSVfNEu9WQ9yOpzye4duA2FEgJIrYvqu483KIWEDCQYoczd4ijKYCr3vifLy-CoeKcw-Ou03xubx_-PqXJ6k11cycsjLg8bxfBdoAmkCFwBr1moOHRdbVCP1Ih1TcIvFFa7Fs5K1mCPF6fx5BJmBOOt9yR7BRgceek"/>
+</div>
+
+<!-- 4. Dónde -->
+<section class="w-full px-6 py-8 content-layer relative">
+<div class="flex flex-col items-center text-center">
+<img alt="" class="icon-doodle mb-3" src="simbolo-DONDE.png"/>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2 uppercase">¿Dónde?</h2>
+<p class="font-body-md text-on-surface" style="font-size:1.15rem; font-weight:500;">Loop Salón de Eventos</p>
+<p class="font-body-md text-on-surface mb-6 flex items-center justify-center gap-1" style="font-size:1.15rem; font-weight:500;"><svg fill="none" height="18" stroke="#757575" stroke-width="1.6" style="flex-shrink:0;" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>Santa Fe 28 - Rufino, Santa Fe</p>
+<a class="btn-minimal px-6 py-3 rounded-full font-label-caps text-label-caps flex items-center gap-2" href="https://www.google.com/maps/search/?api=1&query=Loop+Sal%C3%B3n+de+Eventos%2C+Santa+Fe+28%2C+Rufino%2C+Santa+Fe%2C+Argentina" target="_blank" rel="noopener">
+                CÓMO LLEGAR
+            </a>
+</div>
+</section>
+<!-- Section Divider -->
+<div class="w-full flex justify-center py-6">
+<img alt="horizontal botanical divider" class="w-64 mix-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUUpyhe2STAR3ImVp0Zv5MlUTkDT3ewPRnM5vX6m2AzjR8k7fNb700X6L2SapMHMNak6aR2TNtrpkcr06ONAISCfkpF25DOpaNFCDF3AiKvygyadOliZs28A7EGLnqb51EmL9OikBAyH2Dss2r1fg8HmLveeF6E055i4Wl-q4oxHsRY8qTvEWuAKaqWb84P1Rvok7_HTYJ6j2o-H5QbV4qFpUN-PGtkekLI-jEr3zXEwQcHhSQLTWhZcDrq6yBw-E5XcTbrcdZ8_NW"/>
+</div>
+
+<!-- 5. Regalos -->
+<section class="w-full px-6 py-8 content-layer">
+<div class="card-glass-brown p-8 flex flex-col items-center text-center relative overflow-hidden">
+<img alt="" class="icon-doodle mb-3" src="simbolo-REGALOS.png"/>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-4 uppercase">Regalos</h2>
+<p class="font-body-md text-body-md text-on-surface mb-6">
+                Nada más importante que tu presencia, pero si deseas hacerme un presente podés dejarlo en la siguiente cuenta
+            </p>
+<p class="text-on-surface mb-6" style="font-size:1.2rem; font-weight:600; font-family: Georgia, 'Times New Roman', serif;">Alias: <span id="alias-value">julitartabini15</span></p>
+<button class="btn-minimal px-6 py-3 rounded-full font-label-caps text-label-caps flex items-center gap-2" onclick="copyAlias(this)">
+                COPIAR ALIAS
+            </button>
+</div>
+</section>
+<!-- Section Divider -->
+<div class="w-full flex justify-center py-6">
+<img alt="horizontal botanical divider" class="w-48 mix-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrBkaZRgRozK-QWF1ERNzeQOjFCKID5aX1oztIlE2KXs0zZKFhriTxafNXwGTJIE9dpgkBuhx_jw6m6CAy73Te0lLgS_YGjB2AmsvS_bS7Z5MSVfNEu9WQ9yOpzye4duA2FEgJIrYvqu483KIWEDCQYoczd4ijKYCr3vifLy-CoeKcw-Ou03xubx_-PqXJ6k11cycsjLg8bxfBdoAmkCFwBr1moOHRdbVCP1Ih1TcIvFFa7Fs5K1mCPF6fx5BJmBOOt9yR7BRgceek"/>
+</div>
+
+<!-- 6. Música -->
+<section class="w-full px-6 py-8 content-layer">
+<div class="flex flex-col items-center text-center">
+<img alt="" class="icon-doodle mb-3" src="simbolo-MUSICA.png" style="width:150px; height:150px;"/>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-4 uppercase">Música</h2>
+<p class="font-body-md text-body-md text-on-surface mb-6">¿Qué canción no puede faltar en la fiesta?</p>
+<a class="btn-minimal px-6 py-3 rounded-full font-label-caps text-label-caps flex items-center gap-2" href="https://forms.gle/pgPvf9AdzLv69A4r9" target="_blank">
+                SUGERIR CANCIÓN
+            </a>
+</div>
+</section>
+<!-- Section Divider -->
+<div class="w-full flex justify-center py-6">
+<img alt="horizontal botanical divider" class="w-64 mix-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUUpyhe2STAR3ImVp0Zv5MlUTkDT3ewPRnM5vX6m2AzjR8k7fNb700X6L2SapMHMNak6aR2TNtrpkcr06ONAISCfkpF25DOpaNFCDF3AiKvygyadOliZs28A7EGLnqb51EmL9OikBAyH2Dss2r1fg8HmLveeF6E055i4Wl-q4oxHsRY8qTvEWuAKaqWb84P1Rvok7_HTYJ6j2o-H5QbV4qFpUN-PGtkekLI-jEr3zXEwQcHhSQLTWhZcDrq6yBw-E5XcTbrcdZ8_NW"/>
+</div>
+
+<!-- 7. Confirmación -->
+<section class="w-full px-6 py-8 content-layer relative">
+<div class="card-glass-brown p-8 flex flex-col items-center text-center">
+<img alt="" class="icon-doodle mb-3" src="simbolo-CONFIRMACION-ASISTENCIA.png"/>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-4 uppercase">Confirmación de asistencia</h2>
+<p class="font-body-md text-body-md text-on-surface mb-6">
+                Por favor confirma tu asistencia antes del <span style="font-weight:600;">01/09/2026</span>.
+            </p>
+<a class="btn-minimal px-6 py-3 rounded-full font-label-caps text-label-caps flex items-center gap-2" href="https://wa.me/543462536070?text=Hola!%20Quiero%20confirmar%20mi%20asistencia%20a%20los%2015%20de%20Julia." target="_blank">
+                CONFIRMAR ASISTENCIA
+            </a>
+</div>
+</section>
+
+<!-- 8. Alojamiento -->
+<section class="w-full px-6 py-12 content-layer ">
+<div class="flex flex-col items-center text-center">
+<img alt="" class="icon-doodle mb-3" src="simbolo-ALOJAMIENTO.png" style="width:62px; height:62px;"/>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6 uppercase">Sugerencias de alojamiento</h2>
+<div class="flex flex-col gap-4 w-full max-w-xs">
+<a class="card-glass-brown p-4 flex flex-col items-center justify-center transition-transform duration-150 hover:brightness-95 active:scale-[0.97]" href="https://wa.me/543382465418" target="_blank" rel="noopener">
+<span class="text-on-surface mb-1" style="font-size:1.1rem; font-weight:500;">Italia Apart</span>
+<span class="font-body-md text-body-md text-outline">+54 3382 465418</span>
+</a>
+<a class="card-glass-brown p-4 flex flex-col items-center justify-center transition-transform duration-150 hover:brightness-95 active:scale-[0.97]" href="https://wa.me/543382441073" target="_blank" rel="noopener">
+<span class="text-on-surface mb-1" style="font-size:1.1rem; font-weight:500;">Departamentos Rufino</span>
+<span class="font-body-md text-body-md text-outline">+54 3382 441073</span>
+</a>
+</div>
+</div>
+</section>
+
+<!-- 9. Final Closure -->
+<footer class="w-full pt-12 pb-24 flex flex-col items-center text-center relative overflow-hidden">
+<img alt="botanical divider" class="w-48 mix-multiply mb-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrBkaZRgRozK-QWF1ERNzeQOjFCKID5aX1oztIlE2KXs0zZKFhriTxafNXwGTJIE9dpgkBuhx_jw6m6CAy73Te0lLgS_YGjB2AmsvS_bS7Z5MSVfNEu9WQ9yOpzye4duA2FEgJIrYvqu483KIWEDCQYoczd4ijKYCr3vifLy-CoeKcw-Ou03xubx_-PqXJ6k11cycsjLg8bxfBdoAmkCFwBr1moOHRdbVCP1Ih1TcIvFFa7Fs5K1mCPF6fx5BJmBOOt9yR7BRgceek"/>
+<span class="font-label-caps text-on-surface tracking-widest mb-4 uppercase" style="font-size:2rem; font-weight:600;">¡TE ESPERO!</span>
+<h2 class="font-display-xl text-on-surface tracking-tight name-glow" style="font-size:2rem; font-weight:600; font-style:italic;">JULIA</h2>
+<!-- Bottom scattered elements -->
+<img alt="small flower" class="absolute bottom-10 left-10 w-16 mix-multiply opacity-90" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2gQspWLFMxMCVCsY12l41yWkFpx0gPxIwaMf9e5maQbVaknZb97MczAW4C-sloZAru5hw_Zq8bsgxbWTYtX1urzAkw5sIIc2xOcJ2nZqqYfoQTMhEMW7W2LVRo5h2uuQo-77ONczWFrRQbz_p_14wQ7jkXKtcbieZ3WOKFJ_ireNJsYaui88V6omr1y_D1P84eOwrJ3EkIMyaWBS0OA5gvUS3rrrun77q8wJ-zMvxTVQtb7q5AUa71_XWwEB2EIVqFQ5NV-1g5sGv"/>
+<img alt="leaves" class="absolute bottom-12 right-12 w-20 mix-multiply opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsZKqJVKsH-7TW5UxuRd4M8E6z9kOlw4cWdYR2rBOjDVLwDpFgYVaMVYGzKmDvw2aWVfu7myk9D3htsooW83ZBD-aRLY6TNyKQ6AU7AvMbEBvSZrlGhPATsPjM2HLAQ1WLjZO6VD93h8gWEs8sJMFnBslDTGZCzN1copYBrIily8xJGkWSRThVBhWO9Vdra-761U-clqqQSmOGQHCSxD9QuTQuwhOf6p6nceWLj33yImzx2uNar1w7KlXZOv7AKCTauunqVjNamvZk"/>
+</footer>
+
+<!-- Script for Countdown -->
+<script>
+        const countDownDate = new Date("Oct 11, 2026 21:30:00").getTime();
+
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").innerHTML = "<div class='font-headline-lg-mobile text-headline-lg-mobile'>¡Llegó el día!</div>";
+            }
+        }, 1000);
+    </script>
+<!-- Script for glitter rain -->
+<script>
+        (function () {
+            const layer = document.getElementById("glitter");
+            const COUNT = 55;
+            for (let i = 0; i < COUNT; i++) {
+                const s = document.createElement("span");
+                s.className = "spark";
+                const size = (Math.random() * 3.5 + 3).toFixed(1);
+                const duration = (Math.random() * 7 + 6).toFixed(1);
+                const delay = (Math.random() * -14).toFixed(1);
+                const drift = (Math.random() * 60 - 30).toFixed(0);
+                const peak = (Math.random() * 0.35 + 0.6).toFixed(2);
+                s.style.width = size + "px";
+                s.style.height = size + "px";
+                s.style.left = (Math.random() * 100).toFixed(1) + "%";
+                s.style.setProperty("--drift", drift + "px");
+                s.style.setProperty("--peak", peak);
+                s.style.animationDuration = duration + "s, " + (Math.random() * 2 + 1.6).toFixed(1) + "s";
+                s.style.animationDelay = delay + "s, " + delay + "s";
+                layer.appendChild(s);
+            }
+        })();
+    </script>
+<script>
+        function copyAlias(btn) {
+            const alias = document.getElementById('alias-value').textContent.trim();
+            const original = btn.textContent;
+            function finish(success) {
+                btn.textContent = success ? '¡Copiado!' : 'No se pudo copiar';
+                setTimeout(function () { btn.textContent = original; btn.disabled = false; }, 1800);
+            }
+            function fallbackCopy() {
+                try {
+                    const ta = document.createElement('textarea');
+                    ta.value = alias;
+                    ta.style.position = 'fixed';
+                    ta.style.opacity = '0';
+                    document.body.appendChild(ta);
+                    ta.focus();
+                    ta.select();
+                    const ok = document.execCommand('copy');
+                    document.body.removeChild(ta);
+                    finish(ok);
+                } catch (e) {
+                    finish(false);
+                }
+            }
+            btn.disabled = true;
+            if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(alias).then(function () { finish(true); }).catch(fallbackCopy);
+            } else {
+                fallbackCopy();
+            }
+        }
+    </script>
+</body></html>
